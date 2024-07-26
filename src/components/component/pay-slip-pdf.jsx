@@ -11,6 +11,9 @@ import {
   Path,
   Polygon,
 } from "@react-pdf/renderer";
+import path from 'path';
+import { useState } from 'react';
+import logo from "../../../public/logo.png"
 
 const styles = StyleSheet.create({
   page: {
@@ -249,8 +252,11 @@ const styles = StyleSheet.create({
     color: "#000",
   },
 });
+const logoPath = 'http://localhost:3000/api/image';
+
 
 const PayslipPDF = ({ data }) => (
+
   <Document>
     <Page size="A4" >
       {/* Header Design */}
@@ -269,7 +275,7 @@ const PayslipPDF = ({ data }) => (
         {/* Header Section */}
         <View style={styles.header}>
           <View style={styles.logoContainer}>
-            <Image style={styles.logo} src="/logo.png" />
+            <Image style={styles.logo} src={logoPath}/>
           </View>
           <View style={styles.companyInfo}>
             <View style={styles.infoRow}>

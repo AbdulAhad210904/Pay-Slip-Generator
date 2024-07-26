@@ -39,6 +39,7 @@ interface FormValues {
     deductions: { description: string; amount: string }[];
   };
   note: string;
+  logoPath?: string;
 }
 
 export function PaySlipGenerator() {
@@ -94,6 +95,7 @@ useEffect(() => {
         deductions: [{ description: "", amount: "" }],
       },
       note: "", 
+      logoPath:"/api/image",
     },
   });
 
@@ -225,7 +227,7 @@ useEffect(() => {
         </div>
                       
         {/* Buttons */}
-        <div className="flex space-x-4">
+        <div className="flex space-x-3 justify-center">
           <Button variant="default" className="bg-gray-900 text-white" type="submit" onClick={() => setIsModalVisible(true)}>
             Generate Payslip
           </Button>
@@ -244,13 +246,13 @@ useEffect(() => {
               }
               </PDFDownloadLink>
           </Button>
+            </>
+          )}
           <Button variant="outline" className="bg-green-500 text-white" onClick={() => setIsEmailModalVisible(true)}>
             Email Pdf
           </Button>
-
-            </>
-          )}
         </div>
+
         {/* Pdf View Modal */}
         <Modal isVisible={isModalVisible} onClose={() => setIsModalVisible(false)}>
         <>
