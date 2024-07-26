@@ -45,6 +45,8 @@ export function PaySlipGenerator() {
   // set modal using functions and variables
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEmailModalVisible, setIsEmailModalVisible] = useState(false);
+  const [email, setEmail] = useState('');
+
 
   const [isBrowser, setIsBrowser] = useState(false);
   const sendEmailWithPdf = async () => {
@@ -55,7 +57,7 @@ export function PaySlipGenerator() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          toEmail: 'ahadghayyas@gmail.com', // replace with the actual recipient's email
+          toEmail: email, // replace with the actual recipient's email
           pdfData: formData,
         }),
       });
@@ -63,6 +65,7 @@ export function PaySlipGenerator() {
       const result = await response.json();
       if (response.ok) {
         alert('Email sent successfully!');
+        setIsEmailModalVisible(false);
       } else {
         alert(`Error sending email: ${result.error}`);
       }
@@ -242,9 +245,10 @@ useEffect(() => {
               }
               </PDFDownloadLink>
           </Button>
-          <Button variant="outline" className="bg-green-500 text-white" onClick={sendEmailWithPdf}>
+          <Button variant="outline" className="bg-green-500 text-white" onClick={() => setIsEmailModalVisible(true)}>
             Email Pdf
           </Button>
+
             </>
           )}
         </div>
@@ -262,6 +266,29 @@ useEffect(() => {
       </div>
       </>
         </Modal>
+        <Modal isVisible={isEmailModalVisible} onClose={() => setIsEmailModalVisible(false)}>
+  <div className="p-6">
+    <h3 className="text-lg font-bold mb-4">Enter Email Address</h3>
+    <Label htmlFor="email">Email</Label>
+    <Input
+      id="email"
+      type="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      placeholder="Enter recipient's email address"
+      className="mb-4"
+    />
+    <div className="flex justify-end space-x-4">
+      <Button variant="outline" onClick={() => setIsEmailModalVisible(false)}>
+        Cancel
+      </Button>
+      <Button variant="outline" className="bg-green-500 text-white" onClick={sendEmailWithPdf}>
+        Send Email
+      </Button>
+    </div>
+  </div>
+        </Modal>
+
       </form>
     </div>
   );
