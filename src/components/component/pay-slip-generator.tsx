@@ -44,7 +44,33 @@ interface FormValues {
 export function PaySlipGenerator() {
   // set modal using functions and variables
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEmailModalVisible, setIsEmailModalVisible] = useState(false);
+
   const [isBrowser, setIsBrowser] = useState(false);
+  const sendEmailWithPdf = async () => {
+    try {
+      const response = await fetch('/api/sendPdfEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          toEmail: 'ahadghayyas@gmail.com', // replace with the actual recipient's email
+          pdfData: formData,
+        }),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        alert('Email sent successfully!');
+      } else {
+        alert(`Error sending email: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Error sending email.');
+    }
+  };
 
 useEffect(() => {
   setIsBrowser(true);
@@ -215,7 +241,10 @@ useEffect(() => {
                 loading ? "Loading document..." : "Download Payslip PDF"
               }
               </PDFDownloadLink>
-            </Button>
+          </Button>
+          <Button variant="outline" className="bg-green-500 text-white" onClick={sendEmailWithPdf}>
+            Email Pdf
+          </Button>
             </>
           )}
         </div>
