@@ -42,7 +42,6 @@ interface FormValues {
 }
 
 export function PaySlipGenerator() {
-  // set modal using functions and variables
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEmailModalVisible, setIsEmailModalVisible] = useState(false);
   const [email, setEmail] = useState('');
@@ -57,7 +56,7 @@ export function PaySlipGenerator() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          toEmail: email, // replace with the actual recipient's email
+          toEmail: email, 
           pdfData: formData,
         }),
       });
@@ -252,6 +251,7 @@ useEffect(() => {
             </>
           )}
         </div>
+        {/* Pdf View Modal */}
         <Modal isVisible={isModalVisible} onClose={() => setIsModalVisible(false)}>
         <>
         <div className="flex justify-end p-0 m-0">
@@ -266,6 +266,7 @@ useEffect(() => {
       </div>
       </>
         </Modal>
+        {/* Send Email Modal */}
         <Modal isVisible={isEmailModalVisible} onClose={() => setIsEmailModalVisible(false)}>
   <div className="p-6">
     <h3 className="text-lg font-bold mb-4">Enter Email Address</h3>
