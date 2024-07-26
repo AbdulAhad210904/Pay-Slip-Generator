@@ -11,9 +11,7 @@ import {
   Path,
   Polygon,
 } from "@react-pdf/renderer";
-import path from 'path';
-import { useState } from 'react';
-import logo from "../../../public/logo.png"
+
 
 const styles = StyleSheet.create({
   page: {

@@ -28,13 +28,21 @@ export default async function handler(req, res) {
       pdfWriteStream.on('error', reject);
     });
 
+    console.log('Username and password:', process.env.GMAIL_USER, process.env.GMAIL_PASS);
     // Send email with PDF attachment
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'mail.cortechsols.com',
+        port: 465,
+        secure: true,
         auth: {
           user: process.env.GMAIL_USER,
           pass: process.env.GMAIL_PASS,
         },
+        tls: {
+            rejectUnauthorized: false, 
+            ignoreTLS: true,
+          },
+        
       });
 
     const mailOptions = {
