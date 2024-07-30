@@ -252,7 +252,6 @@ const styles = StyleSheet.create({
 });
 const logoPath = 'http://localhost:3000/api/image';
 
-
 const PayslipPDF = ({ data }) => (
 
   <Document>
@@ -384,11 +383,6 @@ const PayslipPDF = ({ data }) => (
                     <Text style={[styles.fieldValue,{ textAlign: "right" }]}>{earnings.amount} RS</Text>
                 </View>
               ))}
-              <View style={[styles.fieldRow, styles.highlightedField]}>
-                <Text style={[styles.fieldName, styles.highlightedFieldText]}>Gross Earnings:</Text>
-                <Text style={[styles.fieldValue, styles.highlightedFieldText, { textAlign: "right" }]}>{data.grossEarnings} RS</Text>
-              </View>
-              <View style={{ marginBottom: 15 }}></View>
             </View>
             <View style={styles.halfColumn}>
               <View style={{ position: "relative" }}>
@@ -404,14 +398,26 @@ const PayslipPDF = ({ data }) => (
                     <Text style={[styles.fieldValue,{ textAlign: "right" }]}>{deductions.amount} RS</Text>
                 </View>
               ))}
-              <View style={[styles.fieldRow, styles.highlightedField]}>
+            </View>
+          </View>
+
+          <View style={styles.halfColumnContainer}>
+          <View style={styles.halfColumn}>
+          <View style={[styles.fieldRow, styles.highlightedField]}>
+                <Text style={[styles.fieldName, styles.highlightedFieldText]}>Gross Earnings:</Text>
+                <Text style={[styles.fieldValue, styles.highlightedFieldText, { textAlign: "right" }]}>{data.grossEarnings} RS</Text>
+              </View>
+              <View style={{ marginBottom: 15 }}></View>
+          </View>
+          <View style={styles.halfColumn}>
+          <View style={[styles.fieldRow, styles.highlightedField]}>
                 <Text style={[styles.fieldName, styles.highlightedFieldText]}>Gross Deductions:</Text>
                 <Text style={[styles.fieldValue, styles.highlightedFieldText, { textAlign: "right" }]}>{data.grossDeductions} RS</Text>
               </View>
               <View style={{ marginBottom: 15 }}></View>
-            </View>
           </View>
-          
+          </View>
+
           <View style={[styles.fieldRow, styles.highlightedField]}>
             <Text style={[styles.fieldName, styles.highlightedFieldText]}>Total Net Payable:</Text>
             <Text style={[styles.fieldValue, styles.highlightedFieldText, { textAlign: "right" }]}>{data.totalNetPayable} RS</Text>
