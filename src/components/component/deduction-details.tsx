@@ -4,12 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
+interface DeductionField {
+  id: string;
+  description: string;
+  amount: string;
+}
+
 interface Props {
   control: Control<any>;
-  deductionsFields: any;
-  appendDeductions: any;
-  removeDeductions: any;
+  deductionsFields: DeductionField[];
+  appendDeductions: (deduction: DeductionField) => void;
+  removeDeductions: (index: number) => void;
 }
+
 
 const DeductionsDetails: React.FC<Props> = ({ control, deductionsFields, appendDeductions, removeDeductions }) => {
   return (
@@ -73,7 +80,7 @@ const DeductionsDetails: React.FC<Props> = ({ control, deductionsFields, appendD
       <Button
         variant="outline"
         className="mt-4"
-        onClick={() => appendDeductions({ description: "", amount: "" })}
+        onClick={() => appendDeductions({ id: Date.now().toString(),description: "", amount: "" })}
       >
         Add Another Deduction
       </Button>

@@ -4,11 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
+interface AdditionalField {
+  id: string;
+  fieldName: string;
+  fieldValue: string;
+}
 interface Props {
   control: Control<any>;
-  additionalFields: any;
-  appendAdditionalFields: any;
-  removeAdditionalField: any;
+  additionalFields: AdditionalField[];
+  appendAdditionalFields: (additionalField: AdditionalField) => void;
+  removeAdditionalField: (index: number) => void;
 }
 
 const EmployeePaySummary: React.FC<Props> = ({ control, additionalFields, appendAdditionalFields, removeAdditionalField }) => {
@@ -132,7 +137,7 @@ const EmployeePaySummary: React.FC<Props> = ({ control, additionalFields, append
         variant="outline"
         className="mt-4"
         onClick={() =>
-          appendAdditionalFields({ fieldName: "", fieldValue: "" })
+          appendAdditionalFields({ id: Date.now().toString(),fieldName: "", fieldValue: "" })
         }
       >
         Add Another Field

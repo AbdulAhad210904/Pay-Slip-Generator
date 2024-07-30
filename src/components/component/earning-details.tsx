@@ -4,11 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
+interface EarningsField {
+  id: string;
+  description: string;
+  amount: string;
+}
 interface Props {
   control: Control<any>;
-  earningsFields: any;
-  appendEarnings: any;
-  removeEarnings: any;
+  earningsFields: EarningsField[];
+  appendEarnings: (earning: EarningsField) => void;
+  removeEarnings: (index: number) => void;
 }
 
 const EarningsDetails: React.FC<Props> = ({ control, earningsFields, appendEarnings, removeEarnings }) => {
@@ -73,7 +78,7 @@ const EarningsDetails: React.FC<Props> = ({ control, earningsFields, appendEarni
       <Button
         variant="outline"
         className="mt-4"
-        onClick={() => appendEarnings({ description: "", amount: "" })}
+        onClick={() => appendEarnings({id: Date.now().toString(), description: "", amount: "" })}
       >
         Add Another Earning
       </Button>

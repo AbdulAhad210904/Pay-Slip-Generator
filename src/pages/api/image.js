@@ -1,4 +1,3 @@
-// pages/api/image.js
 export default async function handler(req, res) {
     try {
       const response = await fetch('https://cortechdev.com/wp-content/uploads/2023/05/cropped-final-logo1.png');
